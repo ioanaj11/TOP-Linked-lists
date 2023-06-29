@@ -58,10 +58,43 @@ class LinkedList{
         let tail=this.getTail();
 
         let listSize=this.size();
-        let beforeLast=this.at(listSize-1);
+        let beforeLast=this.at(listSize-2);
         beforeLast.nextNode=null;
 
         return tail;
+    }
+
+    contains(value){
+        if (!this.listHead) return false;
+        let currentNode=this.listHead;
+        while (currentNode.nextNode != null){
+            if (currentNode.value === value) return true;
+            currentNode=currentNode.nextNode;
+        }
+        return false;
+    }
+
+    find(value){
+        let index=0;
+        let currentNode=this.listHead;
+        while(currentNode != null){
+            if(currentNode.value === value) return index;
+            currentNode=currentNode.nextNode;
+            index ++;
+        }
+        return null;
+    }
+
+    toString(){
+        if (!this.listHead) return 'list empty';
+        let string='';
+        let currentNode=this.listHead;
+        do{
+            string=string.concat(`(${currentNode.value}) -> `);
+            currentNode=currentNode.nextNode;
+        } while (currentNode != null);
+        string=string.concat('null');
+        return string;
     }
 }
 
