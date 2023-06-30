@@ -96,6 +96,44 @@ class LinkedList{
         string=string.concat('null');
         return string;
     }
+
+    insertAt(value, index){
+        //if the index is too high, the new node is inserted at the end of the list
+        if (index > this.size()) return this.insertAt(value, this.size());
+
+        //if index is zero, the new Node is prepended, else inserted in the given position
+        if (index == 0) this.prepend(value);
+          else {
+            let currentNode=this.listHead;
+            let previousNode;
+        
+            for(let i=0; i<index; i++){
+                previousNode=currentNode;
+                currentNode=currentNode.nextNode;
+            }
+
+            currentNode=new Node(value, previousNode.nextNode);
+            previousNode.nextNode=currentNode;
+          }
+    }
+    
+    removeAt(index){
+        if (index >this.size()) return console.log(`Index value has to be in the range 0-${this.size()}`);
+
+        let currentNode=this.listHead;
+        let previousNode;
+
+        if (index==0){
+            this.listHead=currentNode.nextNode;
+            currentNode.nextNode=null;
+        } else {
+            for(let i=0; i<index; i++){
+                previousNode=currentNode;
+                currentNode=currentNode.nextNode;
+            }
+            previousNode.nextNode=currentNode.nextNode;
+        }
+    }
 }
 
 export {LinkedList}
